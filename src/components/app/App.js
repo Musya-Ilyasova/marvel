@@ -15,7 +15,7 @@ const App = () => {
           <CharList/>
           <CharInfo/>
         </div>
-        <img src={Vision} alt="Vision" />
+        <img src={Vision} alt="Vision" className='bd-decoration'/>
       </main>
     </div>
   )

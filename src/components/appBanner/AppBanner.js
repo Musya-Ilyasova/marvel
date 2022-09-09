@@ -2,9 +2,9 @@
 
 const AppBanner = () => {
   return (
-    <div class="app__banner">
+    <div className="app__banner">
       {/* <img src="img/Avengers.png" alt="Avengers"> */}
-      <div class="app__banner-text">
+      <div className="app__banner-text">
         New comics every week!
         {/* <br> */}
         Stay tuned!
