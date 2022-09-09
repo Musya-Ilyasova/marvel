@@ -1,13 +1,15 @@
 import AppHeader from '../appHeader/AppHeader' 
 import RandomChar from '../randomChar/RandomChar'
 import CharList from '../charList/CharList'
-import CharInfo from '../chaiinfo/Charinfo'
+import CharInfo from '../charInfo/CharInfo'
 
 import Vision from '../../resources/img/vision.png'
 
+import './app.scss'
+
 const App = () => {
   return (
-    <div className='app'>
+    <div className="app">
       <AppHeader/>
       <main>
         <RandomChar/>
@@ -15,7 +17,7 @@ const App = () => {
           <CharList/>
           <CharInfo/>
         </div>
-        <img src={Vision} alt="Vision" className='bd-decoration'/>
+        <img src={Vision} alt="Vision" className="bg-decoration"/>
       </main>
     </div>
   )
