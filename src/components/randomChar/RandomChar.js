@@ -1,8 +1,12 @@
+import Thor from '../../resources/img/thor.jpeg';
+import Mjolnir from '../../resources/img/mjolnir.png';
+import './randomChar.scss';
+
 const RandomChar = () => {
   return (
-  <div class="randomchar">
+    <div class="randomchar">
       <div class="randomchar__block">
-        {/* <img src="img/thor.jpeg" alt="Random character" class="randomchar__img"> */}
+        <img src={Thor} alt="Random character" class="randomchar__img" />
         <div class="randomchar__info">
           <p class="randomchar__name">Thor</p>
           <p class="randomchar__descr">
@@ -20,7 +24,8 @@ const RandomChar = () => {
       </div>
       <div class="randomchar__static">
         <p class="randomchar__title">
-          Random character for today!<br>
+          Random character for today!
+          {/* <br> */}
           Do you want to get to know him better?
         </p>
         <p class="randomchar__title">
@@ -29,8 +34,10 @@ const RandomChar = () => {
         <button class="button button__main">
           <div class="inner">try it</div>
         </button>
-        {/* <img src="img/mjolnir.png" alt="mjolnir" class="randomchar__decoration"> */}
+        <img src={Mjolnir} alt="mjolnir" class="randomchar__decoration" />
       </div>
     </div>
   )
 }
+
+export default RandomChar

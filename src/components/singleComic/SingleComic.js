@@ -1,3 +1,5 @@
+import './singleComic.scss'
+
 const SingleComic = () => {
   return (
     <div class="single-comic">

@@ -1,3 +1,5 @@
+import './skeleton.scss'
+
 const Skeleton = () => {
   return (
     <div class="skeleton">

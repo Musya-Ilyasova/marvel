@@ -1,11 +1,12 @@
 import Skeleton from "../skeleton/Skeleton";
+import Abyss from '../../resources/img/abyss.jpg'
 
 
 const CharInfo = () => {
   return (
   <div class="char__info">
       <div class="char__basics">
-        {/* <img src="img/thor.jpeg" alt="abyss"> */}
+         <img src={Abyss} alt="abyss" />
         <div>
           <div class="char__info-name">thor</div>
           <div class="char__btns">

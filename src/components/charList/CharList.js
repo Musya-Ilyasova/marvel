@@ -1,41 +1,44 @@
+import './charList.scss'
+import Abyss from '../../resources/img/abyss.jpg'
+
 const CharList = () => {
   return (
     <div class="char__list">
       <ul class="char__grid">
         <li class="char__item">
-          {/* <img src="img/abyss.jpg" alt="abyss"> */}
+           <img src={Abyss} alt="abyss" />
           <div class="char__name">Abyss</div>
         </li>
         <li class="char__item char__item_selected">
-          {/* <img src="img/abyss.jpg" alt="abyss"> */}
+           <img src={Abyss} alt="abyss" />
           <div class="char__name">Abyss</div>
         </li>
         <li class="char__item">
-          {/* <img src="img/abyss.jpg" alt="abyss"> */}
+           <img src={Abyss} alt="abyss" />
           <div class="char__name">Abyss</div>
         </li>
         <li class="char__item">
-          {/* <img src="img/abyss.jpg" alt="abyss"> */}
+           <img src={Abyss} alt="abyss" />
           <div class="char__name">Abyss</div>
         </li>
         <li class="char__item">
-          {/* <img src="img/abyss.jpg" alt="abyss"> */}
+           <img src={Abyss} alt="abyss" />
           <div class="char__name">Abyss</div>
         </li>
         <li class="char__item">
-          {/* <img src="img/abyss.jpg" alt="abyss"> */}
+           <img src={Abyss} alt="abyss" />
           <div class="char__name">Abyss</div>
         </li>
         <li class="char__item">
-          {/* <img src="img/abyss.jpg" alt="abyss"> */}
+           <img src={Abyss} alt="abyss" />
           <div class="char__name">Abyss</div>
         </li>
         <li class="char__item">
-          {/* <img src="img/abyss.jpg" alt="abyss"> */}
+           <img src={Abyss} alt="abyss" />
           <div class="char__name">Abyss</div>
         </li>
         <li class="char__item">
-          {/* <img src="img/abyss.jpg" alt="abyss"> */}
+           <img src={Abyss} alt="abyss" />
           <div class="char__name">Abyss</div>
         </li>
       </ul>
@@ -43,7 +46,6 @@ const CharList = () => {
         <div class="inner">load more</div>
       </button>
     </div>
-
   )
 };
 
