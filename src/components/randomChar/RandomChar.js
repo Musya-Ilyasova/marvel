@@ -1,43 +1,112 @@
-import Thor from '../../resources/img/thor.jpeg';
+import { Component } from 'react';
+import Spinner from '../spinner/Spinner'
+import ErrorMessage from '../errorMessage/ErrorMessage';
+
+import MarvelService from '../../services/MarvelService'
+
+// import Thor from '../../resources/img/thor.jpeg';
 import Mjolnir from '../../resources/img/mjolnir.png';
 import './randomChar.scss';
 
-const RandomChar = () => {
-  return (
-    <div className="randomchar">
-      <div className="randomchar__block">
-        <img src={Thor} alt="Random character" className="randomchar__img" />
-        <div className="randomchar__info">
-          <p className="randomchar__name">Thor</p>
-          <p className="randomchar__descr">
-            As the Norse God of thunder and lightning, Thor wields one of the greatest weapons ever made, the enchanted hammer Mjolnir. While others have described Thor as an over-muscled, oafish imbecile, he's quite smart and compassionate...
+
+class RandomChar extends Component {
+  constructor(props) {
+    super(props);
+    this.updateChar();
+  }
+
+  // синтаксис полей классов:
+  state = {
+    char: {},
+    loading: true,
+  }
+
+  marvelService = new MarvelService();
+
+  onCharLoaded = (char) => {
+    this.setState({
+      char,
+      loading: false,
+      error: false
+    })
+  }
+
+  onError = () => {
+    this.setState({
+      loading: false,
+      error: true
+    })
+  }
+
+  updateChar = () => {
+    const id = Math.floor(Math.random() * (1009600-1009200) + 1009200);
+    this.marvelService
+        .getCharacter(id)
+        .then(this.onCharLoaded)
+        .catch(this.onError)
+  }
+
+  render() {
+    const {char, loading, error} = this.state;
+    const errorMessage = error ? <ErrorMessage/> : null;
+    const spinner = loading ? <Spinner/> : null;
+    const content = !(loading || error) ? <View char={char}/> : null
+
+    return (
+      <div className="randomchar">
+        {errorMessage}
+        {spinner}
+        {content}
+        <div className="randomchar__static">
+          <p className="randomchar__title">
+            Random character for today!
+            <br />
+            Do you want to get to know him better?
           </p>
-          <div className="randomchar__btns">
-            <a href="" className="button button__main">
-              <div className="inner">homepage</div>
-            </a>
-            <a href="" className="button button__secondary">
-              <div className="inner">Wiki</div>
-            </a>
-          </div>
+          <p className="randomchar__title">
+            Or choose another one
+          </p>
+          <button className="button button__main">
+            <div className="inner">try it</div>
+          </button>
+          <img src={Mjolnir} alt="mjolnir" className="randomchar__decoration" />
         </div>
       </div>
-      <div className="randomchar__static">
-        <p className="randomchar__title">
-          Random character for today!
-          {/* <br> */}
-          Do you want to get to know him better?
+    )
+  }
+}
+
+const View = ({char}) => {
+  const {name, description, thumbnail, homepage, wiki} = char;
+  let checkDescription = '';
+  if (!description) {
+    checkDescription = 'This hero has no description';
+  } else if (description.length > 224) {
+    checkDescription = description.slice(0, 224) + '...';
+  } else {
+    checkDescription = description;
+  };
+
+  return (
+    <div className="randomchar__block">
+      <img src={thumbnail} alt="Random character" className="randomchar__img" />
+      <div className="randomchar__info">
+        <p className="randomchar__name">{name}</p>
+        <p className="randomchar__descr">
+          {checkDescription}
         </p>
-        <p className="randomchar__title">
-          Or choose another one
-        </p>
-        <button className="button button__main">
-          <div className="inner">try it</div>
-        </button>
-        <img src={Mjolnir} alt="mjolnir" className="randomchar__decoration" />
+        <div className="randomchar__btns">
+          <a href={homepage} className="button button__main">
+            <div className="inner">homepage</div>
+          </a>
+          <a href={wiki} className="button button__secondary">
+            <div className="inner">Wiki</div>
+          </a>
+        </div>
       </div>
     </div>
   )
+
 }
 
 export default RandomChar
