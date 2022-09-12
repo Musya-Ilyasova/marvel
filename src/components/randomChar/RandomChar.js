@@ -10,24 +10,30 @@ import './randomChar.scss';
 
 
 class RandomChar extends Component {
-  constructor(props) {
-    super(props);
-    this.updateChar();
-  }
-
   // синтаксис полей классов:
   state = {
     char: {},
     loading: true,
+    error: false
   }
 
   marvelService = new MarvelService();
+
+  componentDidMount() {
+    this.updateChar();
+  }
 
   onCharLoaded = (char) => {
     this.setState({
       char,
       loading: false,
       error: false
+    })
+  }
+
+  onCharLoading = () => {
+    this.setState({
+      loading: true,
     })
   }
 
@@ -40,6 +46,7 @@ class RandomChar extends Component {
 
   updateChar = () => {
     const id = Math.floor(Math.random() * (1009600-1009200) + 1009200);
+    this.onCharLoading();
     this.marvelService
         .getCharacter(id)
         .then(this.onCharLoaded)
@@ -50,8 +57,7 @@ class RandomChar extends Component {
     const {char, loading, error} = this.state;
     const errorMessage = error ? <ErrorMessage/> : null;
     const spinner = loading ? <Spinner/> : null;
-    const content = !(loading || error) ? <View char={char}/> : null
-
+    const content = !(loading || error) ? <View char={char}/> : null;
     return (
       <div className="randomchar">
         {errorMessage}
@@ -66,8 +72,8 @@ class RandomChar extends Component {
           <p className="randomchar__title">
             Or choose another one
           </p>
-          <button className="button button__main">
-            <div className="inner">try it</div>
+          <button className="button button__main" onClick={() => this.updateChar()}>
+            <div className="inner" >try it</div>
           </button>
           <img src={Mjolnir} alt="mjolnir" className="randomchar__decoration" />
         </div>
@@ -78,7 +84,7 @@ class RandomChar extends Component {
 
 const View = ({char}) => {
   const {name, description, thumbnail, homepage, wiki} = char;
-  let checkDescription = '';
+  let checkDescription = "";
   if (!description) {
     checkDescription = 'This hero has no description';
   } else if (description.length > 224) {
@@ -86,10 +92,11 @@ const View = ({char}) => {
   } else {
     checkDescription = description;
   };
+  const imgStyle = (thumbnail.indexOf('image_not_available') !== -1) ? {objectFit: 'contain'} : null;
 
   return (
     <div className="randomchar__block">
-      <img src={thumbnail} alt="Random character" className="randomchar__img" />
+      <img src={thumbnail} alt="Random character" className="randomchar__img" style={imgStyle}/>
       <div className="randomchar__info">
         <p className="randomchar__name">{name}</p>
         <p className="randomchar__descr">
