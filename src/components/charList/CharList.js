@@ -42,7 +42,9 @@ class CharList extends Component {
     const items = arr.map((item) => {
       const imgStyle = (item.thumbnail.indexOf('image_not_available') !== -1) ? {objectFit: 'unset'} : null;
       return (
-        <li key={item.id} className="char__item">
+        <li key={item.id}
+            onClick={() => this.props.onCharSelected(item.id)}
+        className="char__item">
             <img src={item.thumbnail} alt={item.name} style={imgStyle} />
           <div className="char__name">{item.name}</div>
         </li>
@@ -62,15 +64,13 @@ class CharList extends Component {
     const errorMessage = error ? <ErrorMessage/> : null;
     const spinner = loading ? <Spinner/> : null;
     const content =  !(loading || error) ? items : null;
-    
+
     // console.log(content)
     return (
       <div className="char__list">
-        <ul className="char__grid">
-          {errorMessage}
-          {spinner}
-          {content}
-        </ul>
+        {errorMessage}
+        {spinner}
+        {content}
         <button className="button button__main button__long">
           <div className="inner">load more</div>
         </button>

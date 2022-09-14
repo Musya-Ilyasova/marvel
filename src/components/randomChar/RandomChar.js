@@ -84,23 +84,14 @@ class RandomChar extends Component {
 
 const View = ({char}) => {
   const {name, description, thumbnail, homepage, wiki} = char;
-  let checkDescription = "";
-  if (!description) {
-    checkDescription = 'This hero has no description';
-  } else if (description.length > 224) {
-    checkDescription = description.slice(0, 224) + '...';
-  } else {
-    checkDescription = description;
-  };
   const imgStyle = (thumbnail.indexOf('image_not_available') !== -1) ? {objectFit: 'contain'} : null;
-
   return (
     <div className="randomchar__block">
       <img src={thumbnail} alt="Random character" className="randomchar__img" style={imgStyle}/>
       <div className="randomchar__info">
         <p className="randomchar__name">{name}</p>
         <p className="randomchar__descr">
-          {checkDescription}
+          {description}
         </p>
         <div className="randomchar__btns">
           <a href={homepage} className="button button__main">
