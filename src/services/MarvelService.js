@@ -3,6 +3,7 @@
 class MarvelService {
   _apiBase = 'https://gateway.marvel.com:443/v1/public/'; // переменные начинающиеся через нижний лодаш говорят о том что это неизменяемая переменнная (неформальная договоренность между программистами)
   _apiKey = 'apikey=d81759a9997ed1ebda79147a02e63a54';
+  _baseOffset = 210;
   getResource = async (url) => {
     let res = await fetch(url);
     if(!res.ok) {
@@ -11,8 +12,8 @@ class MarvelService {
     return await res.json();
   }
 
-  getAllCharacters = async () => {
-    const res = await this.getResource(`${this._apiBase}characters?limit=9&offset=210&${this._apiKey}`);
+  getAllCharacters = async (offset = this._baseOffset) => {
+    const res = await this.getResource(`${this._apiBase}characters?limit=9&offset=${offset}&${this._apiKey}`);
     return res.data.results.map(this._transformCharacter);
   }
 
