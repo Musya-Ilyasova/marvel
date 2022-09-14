@@ -4,6 +4,7 @@ class MarvelService {
   _apiBase = 'https://gateway.marvel.com:443/v1/public/'; // переменные начинающиеся через нижний лодаш говорят о том что это неизменяемая переменнная (неформальная договоренность между программистами)
   _apiKey = 'apikey=d81759a9997ed1ebda79147a02e63a54';
   _baseOffset = 210;
+  
   getResource = async (url) => {
     let res = await fetch(url);
     if(!res.ok) {

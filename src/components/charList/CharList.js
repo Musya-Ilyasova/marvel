@@ -7,12 +7,13 @@ import './charList.scss'
 
 class CharList extends Component {
   state = {
-    chars: [],
+    charList: [],
     loading: true,
     error: false,
     newItemLoading: false,
-    offset: 210
+    offset: 210,
   }
+
 
   marvelService = new MarvelService();
 
@@ -21,23 +22,22 @@ class CharList extends Component {
   }
 
   onRequest = (offset) => {
-    this.onCharsLoading();
+    this.onCharListLoading();
     this.marvelService.getAllCharacters(offset)
-      .then(this.onCharsLoaded)
-      .catch(this.onError)
+        .then(this.onCharListLoaded)
+        .catch(this.onError)
   }
 
-  onCharsLoading = () => {
+  onCharListLoading = () => {
     this.setState({
       newItemLoading: true
     })
   }
 
-  onCharsLoaded = (newChars) => {
-    this.setState(({offset, chars}) => ({
-      chars: [...chars, ...newChars],
+  onCharListLoaded = (newCharList) => {
+    this.setState(({offset, charList}) => ({
+      charList: [...charList, ...newCharList],
       loading: false,
-      error: false,
       newItemLoading: false,
       offset: offset + 9
     }))
@@ -71,8 +71,8 @@ class CharList extends Component {
 
 
   render () {
-    const {chars, loading, error, offset, newItemLoading} = this.state;
-    const items = this.renderItems(chars);
+    const {charList, loading, error, offset, newItemLoading} = this.state;
+    const items = this.renderItems(charList);
     const errorMessage = error ? <ErrorMessage/> : null;
     const spinner = loading ? <Spinner/> : null;
     const content =  !(loading || error) ? items : null;
