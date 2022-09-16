@@ -63,13 +63,13 @@ class CharList extends Component {
   }
 
   focusItem = (id) => {
-    itemRefs.current.forEach(item => item.classList.remove('char__item_selected'));
-    itemRefs.current[id].classList.add('char__item_selected');
-    itemRefs.current[id].focus();
+    this.itemRefs.forEach(item => item.classList.remove('char__item_selected'));
+    this.itemRefs[id].classList.add('char__item_selected');
+    this.itemRefs[id].focus();
   }
 
   renderItems(arr) {
-    const items = arr.map((item) => {
+    const items = arr.map((item, i) => {
       const imgStyle = (item.thumbnail.indexOf('image_not_available') !== -1) ? {objectFit: 'unset'} : null;
       return (
         <li 
@@ -78,12 +78,12 @@ class CharList extends Component {
             key={item.id}
             onClick={() => {
               this.props.onCharSelected(item.id);
-              focusItem(i);
+              this.focusItem(i);
             }}
             onKeyPress={(e) => {
               if (e.key === ' ' || e.key === "Enter") {
-                  props.onCharSelected(item.id);
-                  focusItem(i);
+                this.props.onCharSelected(item.id);
+                this.focusItem(i);
               }
             }}
             className="char__item">
@@ -125,7 +125,7 @@ class CharList extends Component {
 
 
 CharList.propTypes = {
-  onCharSelected: PropTypes.func
+  onCharSelected: PropTypes.func.isRequired
 }
 
 export default CharList;
