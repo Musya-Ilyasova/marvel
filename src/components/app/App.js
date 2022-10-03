@@ -26,12 +26,12 @@ const App = () => {
           <RandomChar/>
         </ErrorBoundary>
         <div className="char__content">
-          <ErrorBoundary>
+          {/* <ErrorBoundary>
             <CharList onCharSelected = {onCharSelected}/>
-          </ErrorBoundary>
-          <ErrorBoundary>
+          </ErrorBoundary> */}
+          {/* <ErrorBoundary>
             <CharInfo charId={selectedChar}/>
-          </ErrorBoundary>
+          </ErrorBoundary> */}
         </div>
         <img src={Vision} alt="Vision" className="bg-decoration"/>
       </main>
