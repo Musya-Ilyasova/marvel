@@ -11,10 +11,16 @@ import './randomChar.scss';
 const RandomChar = () => {
 
   const [char, setChar] = useState(null);
-  const {loading, error, getCharacter} = useMarvelService();
+  const {loading, error, getCharacter, clearError} = useMarvelService();
 
   useEffect(() => {
     updateChar();
+
+    const timerId = setInterval(updateChar, 60000);
+
+    return () => {
+      clearInterval(timerId)
+    }
   }, []);
 
   const onCharLoaded = (char) => {
@@ -22,6 +28,7 @@ const RandomChar = () => {
   }
 
   const updateChar = () => {
+    clearError();
     const id = Math.floor(Math.random() * (1009600-1009200) + 1009200);
     getCharacter(id)
       .then(onCharLoaded)
@@ -29,7 +36,7 @@ const RandomChar = () => {
 
   const errorMessage = error ? <ErrorMessage/> : null;
   const spinner = loading ? <Spinner/> : null;
-  const content = !(loading || error) ? <View char={char}/> : null;
+  const content = !(loading || error || !char) ? <View char={char}/> : null;
   return (
     <div className="randomchar">
       {errorMessage}
@@ -44,7 +51,7 @@ const RandomChar = () => {
         <p className="randomchar__title">
           Or choose another one
         </p>
-        <button className="button button__main" onClick={() => this.updateChar()}>
+        <button className="button button__main" onClick={() => updateChar()}>
           <div className="inner" >try it</div>
         </button>
         <img src={Mjolnir} alt="mjolnir" className="randomchar__decoration" />
@@ -56,6 +63,7 @@ const RandomChar = () => {
 const View = ({char}) => {
   const {name, description, thumbnail, homepage, wiki} = char;
   const imgStyle = (thumbnail.indexOf('image_not_available') !== -1) ? {objectFit: 'contain'} : null;
+
   return (
     <div className="randomchar__block">
       <img src={thumbnail} alt="Random character" className="randomchar__img" style={imgStyle}/>
@@ -75,7 +83,6 @@ const View = ({char}) => {
       </div>
     </div>
   )
-
 }
 
 export default RandomChar

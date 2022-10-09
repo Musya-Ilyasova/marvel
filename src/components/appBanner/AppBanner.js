@@ -1,15 +1,16 @@
-
+import Avangers from '../../resources/img/Avengers.png'
+import AvangersLogo from '../../resources/img/Avengers_logo.png'
 
 const AppBanner = () => {
   return (
     <div className="app__banner">
-      {/* <img src="img/Avengers.png" alt="Avengers"> */}
+      <img src={Avangers} alt="Avengers"/>
       <div className="app__banner-text">
         New comics every week!
-        {/* <br> */}
+        <br/>
         Stay tuned!
       </div>
-      {/* <img src="img/Avengers_logo.png" alt="Avengers logo"> */}
+      <img src={AvangersLogo} alt="Avengers logo"/>
     </div>
   )
 }

@@ -8,10 +8,8 @@ import Skeleton from "../skeleton/Skeleton";
 const CharInfo = (props) => {
 
   const [char, setChar] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
 
-  const marvelService = useMarvelService();
+  const {loading, error, getCharacter, clearError} = useMarvelService();
 
 
   useEffect(() => {
@@ -24,28 +22,13 @@ const CharInfo = (props) => {
       return;
     };
 
-    onCharLoading();
-
-    marvelService
-      .getCharacter(charId)
+    clearError();
+    getCharacter(charId)
       .then(onCharLoaded)
-      .catch(onError)
   }
 
   const onCharLoaded = (char) => {
     setChar(char);
-    setLoading(loading => false);
-    setError(error => false);
-  }
-
-  const onCharLoading = () => {
-    setLoading(loading => true);
-  }
-
-
-  const onError = () => {
-    setLoading(loading => false);
-    setError(error => true);
   }
 
   const skeleton = char || loading || error ? null : <Skeleton/>;
