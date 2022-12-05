@@ -24,6 +24,15 @@
     padding: 15px;
     cursor: pointer;
     transition: 0.3s transform;
+    &_wrapper {
+      &-enter {
+        opacity: 0;
+      }
+      &-enter-active {
+        opacity: 1;
+        transition: opacity 500ms ease-in;
+      }
+    }
 
     img {
       width: 200px;
