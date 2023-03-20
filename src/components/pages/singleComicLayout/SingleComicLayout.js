@@ -18,4 +18,5 @@ const SingleComicLayout = ({data}) => {
     </div>
   )
 }
+
 export default SingleComicLayout
