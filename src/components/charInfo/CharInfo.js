@@ -36,6 +36,7 @@ const CharInfo = (props) => {
   const errorMessage = error ? <ErrorMessage/> : null;
   const spinner = loading ? <Spinner/> : null;
   const content = !(loading || error || !char) ? <View char={char}/> : null;
+
   return (
     <div className="char__info">
       {skeleton}
@@ -78,7 +79,7 @@ const View = ({char}) => {
           comics.map((item, i) => {
             return (
               <li key={i} className="char__comics-item">
-                <Link to={`comics/${(item.resourceURI).replace('http://gateway.marvel.com/v1/public/comics/', '')}`}>
+                <Link to={`/comics/${(item.resourceURI).replace('http://gateway.marvel.com/v1/public/comics/', '')}`}>
                   {item.name}
                 </Link>
               </li>

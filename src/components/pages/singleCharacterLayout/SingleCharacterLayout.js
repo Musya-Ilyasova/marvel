@@ -1,17 +1,25 @@
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 import './singleCharacterLayout.scss'
 
 const SingleCharacterLayout = ({data}) => {
-  const {title, description, thumbnail} = data;
+  const {name, description, thumbnail} = data;
   return (
     <div className="single-character">
-      <img src={thumbnail} alt={title} className="single-character__img"/>
+      <Helmet>
+        <meta
+          name="description"
+          content={`Page about ${name}`}
+        />
+        <title>{name}</title>
+      </Helmet>
+      <img src={thumbnail} alt={name} className="single-character__img"/>
       <div className="single-character__info">
-        <h2 className="single-character__name">{title}</h2>
+        <h2 className="single-character__name">{name}</h2>
         <p className="single-character__descr">{description}</p>
       </div>
-      <Link to="/" className="single-character__back">Back to all</Link>
+      <Link to="/marvel" className="single-character__back">Back to all</Link>
     </div>
   )
 }
