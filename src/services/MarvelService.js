@@ -1,7 +1,7 @@
 import {useHttp} from '../hooks/http.hook';
 
 const useMarvelService = () => {
-  const {loading, request, error, clearError} = useHttp();
+  const {request, clearError, process, setProcess} = useHttp();
   const _apiBase = 'https://gateway.marvel.com:443/v1/public/'; // переменные начинающиеся через нижний лодаш говорят о том что это неизменяемая переменнная (неформальная договоренность между программистами)
   const _apiKey = 'apikey=d81759a9997ed1ebda79147a02e63a54';
   const _baseOffset = 210;
@@ -71,7 +71,7 @@ const useMarvelService = () => {
     }
   }
 
-  return {loading, error, getAllCharacters, getCharacter, getSearchCharacter, getAllComics, getComic, clearError}
+  return {getAllCharacters, getCharacter, getSearchCharacter, getAllComics, getComic, clearError, process, setProcess}
 }
 
 

@@ -14,6 +14,7 @@ const MainPage = () => {
   const onCharSelected = (id) => {
     setCrat(id);
   }
+
   return (
     <>
       <Helmet>
